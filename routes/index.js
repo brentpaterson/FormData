@@ -75,4 +75,23 @@ router.post('/readCustomerInfoAndRespond', function(req, res, next) {
 
 });
 
+/*
+ * ===================================================================
+ * Part B - Modern REST Version (LabFormToREST_API)
+ * ===================================================================
+ * Endpoint: POST /api/customer
+ * Accepts: JSON payload { name: string, email: string }
+ * Returns: JSON payload { message: string, email: string }
+ * Architecture: Browser JS -> fetch() -> Express REST API -> JSON response
+ */
+router.post('/api/customer', function(req, res) {
+  const name = req.body.name;
+  const email = req.body.email;
+
+  res.json({
+    message: "Welcome " + name,
+    email: email
+  });
+});
+
 module.exports = router;

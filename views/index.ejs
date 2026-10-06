@@ -42,7 +42,50 @@
   <input type="submit" value="Go"/>
 </form>
 
+<br><br><br>
+<hr>
 
+<!--
+  ===================================================================
+  Part B - Modern REST Version (LabFormToREST_API)
+  ===================================================================
+  Uses client-side JavaScript fetch() to communicate with /api/customer
+  and dynamically updates #result without a full page reload.
+-->
+<h2>Part B: Modern REST/JSON Version (fetch API - No Page Reload)</h2>
+<p>Tests sending JSON asynchronously via <code>fetch()</code> to <code>/api/customer</code> and updating the page dynamically.</p>
+
+<div>
+  Name: <input type="text" id="name" />
+  <br/>
+  Email: <input type="text" id="email" />
+  <br/>
+  <button type="button" id="submitBtn">Submit via REST (fetch)</button>
+</div>
+
+<br/>
+<b>REST API Response:</b>
+<div id="result" style="margin-top: 8px; padding: 10px; border: 1px dashed #666; max-width: 400px; min-height: 24px;">
+  <i>Results will appear here without reloading the page...</i>
+</div>
+
+<script>
+  document.getElementById("submitBtn").addEventListener("click", async () => {
+    const response = await fetch("/api/customer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value
+      })
+    });
+    const data = await response.json();
+    document.getElementById("result").innerHTML =
+      data.message + "<br>" + data.email;
+  });
+</script>
 
 </body>
 </html>
